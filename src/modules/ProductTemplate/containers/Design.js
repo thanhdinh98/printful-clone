@@ -267,36 +267,42 @@ export default function Design({ template, type, onReview, onSaveDesign }) {
     });
   };
 
-  const onChooseImage = (src) => {
+  const onChooseImage = (file) => {
     const clipPath = _.find(canvas.getObjects(), (o) => o.name === 'clip');
 
-    fabric.Image.fromURL(
-      src,
-      (iomg) => {
-        iomg.set({
-          clipTo(ctx) {
-            return _.bind(clipByName, iomg)(ctx, clipPath);
-          },
-        });
-        iomg.scaleToWidth(clipPath.width);
+    const reader = new FileReader();
 
-        iomg.on('mousemove', () => {
-          iomg.set({ isOld: true });
-        });
+    reader.onload = () => {
+      fabric.Image.fromURL(
+        reader.result,
+        (iomg) => {
+          iomg.set({
+            clipTo(ctx) {
+              return _.bind(clipByName, iomg)(ctx, clipPath);
+            },
+          });
+          iomg.scaleToWidth(clipPath.width);
 
-        iomg.on('mouseup', () => {
-          setIsCapture((preCapture) => !preCapture);
-        });
+          iomg.on('mousemove', () => {
+            iomg.set({ isOld: true });
+          });
 
-        setObjects({ ...objects, [template]: [...objects[template], iomg] });
-      },
-      {
-        name: shortId.generate(),
-        top: (clipPath.top + clipPath.height) / 2,
-        left: clipPath.left,
-        crossOrigin: 'anonymous',
-      }
-    );
+          iomg.on('mouseup', () => {
+            setIsCapture((preCapture) => !preCapture);
+          });
+
+          setObjects({ ...objects, [template]: [...objects[template], iomg] });
+        },
+        {
+          name: shortId.generate(),
+          top: (clipPath.top + clipPath.height) / 2,
+          left: clipPath.left,
+          crossOrigin: 'anonymous',
+        }
+      );
+    };
+
+    reader.readAsDataURL(file);
   };
 
   const onSaveTextObject = (textId) => {
