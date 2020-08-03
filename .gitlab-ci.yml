@@ -28,6 +28,6 @@ deploy:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | ssh-add -
     - mkdir -m 700 -p /root/.ssh
-    - ssh -o StrictHostKeyChecking=no thanh@brandly.vn 'bash -s' < scripts/deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD
+    - ssh -o StrictHostKeyChecking=no thanhdinh@brandly.vn 'bash -s' < scripts/deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD
   only:
     - deploy
