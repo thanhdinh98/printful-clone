@@ -19,7 +19,7 @@ build:
     - docker build -t registry.gitlab.com/dnthanh1298/printful .
     - docker push registry.gitlab.com/dnthanh1298/printful
   only:
-    - dashboard/deploy
+    - deploy
 
 deploy:
   stage: deploy
@@ -30,4 +30,4 @@ deploy:
     - mkdir -m 700 -p /root/.ssh
     - ssh -o StrictHostKeyChecking=no thanh@brandly.vn 'bash -s' < scripts/deploy.sh $DOCKER_USERNAME $DOCKER_PASSWORD
   only:
-    - dashboard/deploy
+    - deploy
