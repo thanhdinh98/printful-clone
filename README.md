@@ -1,8 +1,16 @@
-### Install
-```
-npm install
-```
+## Printful Clone
+
+![demo](/demo/demo.gif)
+![demo](/demo/demo.png)
+
+## Getting Started
+
 ### Run
+
 ```
-API_URI=https://api-kingify.tvtprod.com npm run dev
+    API_URI=https://api-kingify.tvtprod.com && npm run dev
 ```
+
+## Live demo
+
+[http://printful.brandly.vn](http://printful.brandly.vn)
