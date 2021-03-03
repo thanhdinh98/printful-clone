@@ -1,6 +1,5 @@
 ## Printful Clone
 
-![demo](/demo/demo.gif)
 ![demo](/demo/demo.png)
 
 ## Getting Started
